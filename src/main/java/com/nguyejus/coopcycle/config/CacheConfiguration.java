@@ -63,6 +63,10 @@ public class CacheConfiguration {
             createCache(cm, com.nguyejus.coopcycle.domain.Order.class.getName() + ".products");
             createCache(cm, com.nguyejus.coopcycle.domain.Product.class.getName());
             createCache(cm, com.nguyejus.coopcycle.domain.Product.class.getName() + ".ordercontents");
+            createCache(cm, com.nguyejus.coopcycle.domain.Order.class.getName() + ".orderContents");
+            createCache(cm, com.nguyejus.coopcycle.domain.OrderContent.class.getName());
+            createCache(cm, com.nguyejus.coopcycle.domain.OrderContent.class.getName() + ".products");
+            createCache(cm, com.nguyejus.coopcycle.domain.Product.class.getName() + ".orders");
             // jhipster-needle-ehcache-add-entry
         };
     }

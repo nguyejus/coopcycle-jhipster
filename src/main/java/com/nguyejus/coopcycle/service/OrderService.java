@@ -10,8 +10,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -87,20 +85,7 @@ public class OrderService {
     @Transactional(readOnly = true)
     public List<OrderDTO> findAll() {
         log.debug("Request to get all Orders");
-        return orderRepository
-            .findAllWithEagerRelationships()
-            .stream()
-            .map(orderMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
-
-    /**
-     * Get all the orders with eager load of many-to-many relationships.
-     *
-     * @return the list of entities.
-     */
-    public Page<OrderDTO> findAllWithEagerRelationships(Pageable pageable) {
-        return orderRepository.findAllWithEagerRelationships(pageable).map(orderMapper::toDto);
+        return orderRepository.findAll().stream().map(orderMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
@@ -112,7 +97,7 @@ public class OrderService {
     @Transactional(readOnly = true)
     public Optional<OrderDTO> findOne(Long id) {
         log.debug("Request to get Order : {}", id);
-        return orderRepository.findOneWithEagerRelationships(id).map(orderMapper::toDto);
+        return orderRepository.findById(id).map(orderMapper::toDto);
     }
 
     /**

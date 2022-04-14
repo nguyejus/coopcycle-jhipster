@@ -10,8 +10,6 @@ import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { IOrder, Order } from '../order.model';
 import { OrderService } from '../service/order.service';
-import { IProduct } from 'app/entities/product/product.model';
-import { ProductService } from 'app/entities/product/service/product.service';
 import { ICourse } from 'app/entities/course/course.model';
 import { CourseService } from 'app/entities/course/service/course.service';
 import { ICustomer } from 'app/entities/customer/customer.model';
@@ -28,7 +26,6 @@ export class OrderUpdateComponent implements OnInit {
   isSaving = false;
   stateValues = Object.keys(State);
 
-  productsSharedCollection: IProduct[] = [];
   coursesSharedCollection: ICourse[] = [];
   customersSharedCollection: ICustomer[] = [];
   cooperativesSharedCollection: ICooperative[] = [];
@@ -39,13 +36,9 @@ export class OrderUpdateComponent implements OnInit {
     iDcooperative: [null, [Validators.required]],
     iDcustomer: [null, [Validators.required]],
     iDcourse: [null, [Validators.required]],
-    iDproduct: [null, [Validators.required]],
     totalPrice: [null, [Validators.min(3), Validators.max(300)]],
     date: [],
     state: [],
-    quantityAsked: [],
-    productAvailable: [],
-    products: [null, Validators.required],
     course: [],
     customer: [],
     cooperative: [],
@@ -53,7 +46,6 @@ export class OrderUpdateComponent implements OnInit {
 
   constructor(
     protected orderService: OrderService,
-    protected productService: ProductService,
     protected courseService: CourseService,
     protected customerService: CustomerService,
     protected cooperativeService: CooperativeService,
@@ -88,10 +80,6 @@ export class OrderUpdateComponent implements OnInit {
     }
   }
 
-  trackProductById(_index: number, item: IProduct): number {
-    return item.id!;
-  }
-
   trackCourseById(_index: number, item: ICourse): number {
     return item.id!;
   }
@@ -102,17 +90,6 @@ export class OrderUpdateComponent implements OnInit {
 
   trackCooperativeById(_index: number, item: ICooperative): number {
     return item.id!;
-  }
-
-  getSelectedProduct(option: IProduct, selectedVals?: IProduct[]): IProduct {
-    if (selectedVals) {
-      for (const selectedVal of selectedVals) {
-        if (option.id === selectedVal.id) {
-          return selectedVal;
-        }
-      }
-    }
-    return option;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IOrder>>): void {
@@ -141,22 +118,14 @@ export class OrderUpdateComponent implements OnInit {
       iDcooperative: order.iDcooperative,
       iDcustomer: order.iDcustomer,
       iDcourse: order.iDcourse,
-      iDproduct: order.iDproduct,
       totalPrice: order.totalPrice,
       date: order.date ? order.date.format(DATE_TIME_FORMAT) : null,
       state: order.state,
-      quantityAsked: order.quantityAsked,
-      productAvailable: order.productAvailable,
-      products: order.products,
       course: order.course,
       customer: order.customer,
       cooperative: order.cooperative,
     });
 
-    this.productsSharedCollection = this.productService.addProductToCollectionIfMissing(
-      this.productsSharedCollection,
-      ...(order.products ?? [])
-    );
     this.coursesSharedCollection = this.courseService.addCourseToCollectionIfMissing(this.coursesSharedCollection, order.course);
     this.customersSharedCollection = this.customerService.addCustomerToCollectionIfMissing(this.customersSharedCollection, order.customer);
     this.cooperativesSharedCollection = this.cooperativeService.addCooperativeToCollectionIfMissing(
@@ -166,16 +135,6 @@ export class OrderUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
-    this.productService
-      .query()
-      .pipe(map((res: HttpResponse<IProduct[]>) => res.body ?? []))
-      .pipe(
-        map((products: IProduct[]) =>
-          this.productService.addProductToCollectionIfMissing(products, ...(this.editForm.get('products')!.value ?? []))
-        )
-      )
-      .subscribe((products: IProduct[]) => (this.productsSharedCollection = products));
-
     this.courseService
       .query()
       .pipe(map((res: HttpResponse<ICourse[]>) => res.body ?? []))
@@ -211,13 +170,9 @@ export class OrderUpdateComponent implements OnInit {
       iDcooperative: this.editForm.get(['iDcooperative'])!.value,
       iDcustomer: this.editForm.get(['iDcustomer'])!.value,
       iDcourse: this.editForm.get(['iDcourse'])!.value,
-      iDproduct: this.editForm.get(['iDproduct'])!.value,
       totalPrice: this.editForm.get(['totalPrice'])!.value,
       date: this.editForm.get(['date'])!.value ? dayjs(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
       state: this.editForm.get(['state'])!.value,
-      quantityAsked: this.editForm.get(['quantityAsked'])!.value,
-      productAvailable: this.editForm.get(['productAvailable'])!.value,
-      products: this.editForm.get(['products'])!.value,
       course: this.editForm.get(['course'])!.value,
       customer: this.editForm.get(['customer'])!.value,
       cooperative: this.editForm.get(['cooperative'])!.value,

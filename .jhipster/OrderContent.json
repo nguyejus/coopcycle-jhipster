@@ -1,0 +1,49 @@
+{
+  "applications": "*",
+  "changelogDate": "20220414134251",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "order_content",
+  "fields": [
+    {
+      "fieldName": "iDproduct",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "iDorder",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "quantityAsked",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "productAvailable",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "OrderContent",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "ordercontent",
+      "ownerSide": true,
+      "relationshipName": "product",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "orderContent",
+      "relationshipName": "order",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

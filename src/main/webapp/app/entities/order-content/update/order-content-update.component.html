@@ -1,0 +1,140 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-order-content-heading"
+        data-cy="OrderContentCreateUpdateHeading"
+        jhiTranslate="coopcycleApp.orderContent.home.createOrEditLabel"
+      >
+        Create or edit a Order Content
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="coopcycleApp.orderContent.iDproduct" for="field_iDproduct">I Dproduct</label>
+          <input type="number" class="form-control" name="iDproduct" id="field_iDproduct" data-cy="iDproduct" formControlName="iDproduct" />
+          <div *ngIf="editForm.get('iDproduct')!.invalid && (editForm.get('iDproduct')!.dirty || editForm.get('iDproduct')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('iDproduct')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('iDproduct')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="coopcycleApp.orderContent.iDorder" for="field_iDorder">I Dorder</label>
+          <input type="number" class="form-control" name="iDorder" id="field_iDorder" data-cy="iDorder" formControlName="iDorder" />
+          <div *ngIf="editForm.get('iDorder')!.invalid && (editForm.get('iDorder')!.dirty || editForm.get('iDorder')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('iDorder')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('iDorder')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="coopcycleApp.orderContent.quantityAsked" for="field_quantityAsked">Quantity Asked</label>
+          <input
+            type="number"
+            class="form-control"
+            name="quantityAsked"
+            id="field_quantityAsked"
+            data-cy="quantityAsked"
+            formControlName="quantityAsked"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="coopcycleApp.orderContent.productAvailable" for="field_productAvailable"
+            >Product Available</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="productAvailable"
+            id="field_productAvailable"
+            data-cy="productAvailable"
+            formControlName="productAvailable"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="coopcycleApp.orderContent.product" for="field_products">Product</label>
+          <select class="form-control" id="field_products" data-cy="product" multiple name="products" formControlName="products">
+            <option
+              [ngValue]="getSelectedProduct(productOption, editForm.get('products')!.value)"
+              *ngFor="let productOption of productsSharedCollection; trackBy: trackProductById"
+            >
+              {{ productOption.id }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['products'])!.invalid && (editForm.get(['products'])!.dirty || editForm.get(['products'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['products'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="coopcycleApp.orderContent.order" for="field_order">Order</label>
+          <select class="form-control" id="field_order" data-cy="order" name="order" formControlName="order">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="orderOption.id === editForm.get('order')!.value?.id ? editForm.get('order')!.value : orderOption"
+              *ngFor="let orderOption of ordersSharedCollection; trackBy: trackOrderById"
+            >
+              {{ orderOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -39,6 +39,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'coopcycleApp.product.home.title' },
         loadChildren: () => import('./product/product.module').then(m => m.ProductModule),
       },
+      {
+        path: 'order-content',
+        data: { pageTitle: 'coopcycleApp.orderContent.home.title' },
+        loadChildren: () => import('./order-content/order-content.module').then(m => m.OrderContentModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

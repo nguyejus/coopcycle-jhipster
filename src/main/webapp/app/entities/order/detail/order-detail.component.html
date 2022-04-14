@@ -30,10 +30,6 @@
         <dd>
           <span>{{ order.iDcourse }}</span>
         </dd>
-        <dt><span jhiTranslate="coopcycleApp.order.iDproduct">I Dproduct</span></dt>
-        <dd>
-          <span>{{ order.iDproduct }}</span>
-        </dd>
         <dt><span jhiTranslate="coopcycleApp.order.totalPrice">Total Price</span></dt>
         <dd>
           <span>{{ order.totalPrice }}</span>
@@ -45,21 +41,6 @@
         <dt><span jhiTranslate="coopcycleApp.order.state">State</span></dt>
         <dd>
           <span jhiTranslate="{{ 'coopcycleApp.State.' + order.state }}">{{ order.state }}</span>
-        </dd>
-        <dt><span jhiTranslate="coopcycleApp.order.quantityAsked">Quantity Asked</span></dt>
-        <dd>
-          <span>{{ order.quantityAsked }}</span>
-        </dd>
-        <dt><span jhiTranslate="coopcycleApp.order.productAvailable">Product Available</span></dt>
-        <dd>
-          <span>{{ order.productAvailable }}</span>
-        </dd>
-        <dt><span jhiTranslate="coopcycleApp.order.product">Product</span></dt>
-        <dd>
-          <span *ngFor="let product of order.products; let last = last">
-            <a [routerLink]="['/product', product?.id, 'view']">{{ product.id }}</a
-            >{{ last ? '' : ', ' }}
-          </span>
         </dd>
         <dt><span jhiTranslate="coopcycleApp.order.course">Course</span></dt>
         <dd>

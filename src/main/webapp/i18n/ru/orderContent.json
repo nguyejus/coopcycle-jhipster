@@ -1,0 +1,29 @@
+{
+  "coopcycleApp": {
+    "orderContent": {
+      "home": {
+        "title": "Order Contents",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Order Content",
+        "createOrEditLabel": "Создать или отредактировать Order Content",
+        "notFound": "Order Contents не найдено"
+      },
+      "created": "Новый Order Content создан с идентификатором {{ param }}",
+      "updated": "Order Content обновлен с идентификатором {{ param }}",
+      "deleted": "Order Content удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Order Content {{ id }}?"
+      },
+      "detail": {
+        "title": "Order Content"
+      },
+      "id": "ID",
+      "iDproduct": "I Dproduct",
+      "iDorder": "I Dorder",
+      "quantityAsked": "Quantity Asked",
+      "productAvailable": "Product Available",
+      "product": "Product",
+      "order": "Order"
+    }
+  }
+}

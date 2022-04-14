@@ -37,13 +37,9 @@
           <th scope="col"><span jhiTranslate="coopcycleApp.order.iDcooperative">I Dcooperative</span></th>
           <th scope="col"><span jhiTranslate="coopcycleApp.order.iDcustomer">I Dcustomer</span></th>
           <th scope="col"><span jhiTranslate="coopcycleApp.order.iDcourse">I Dcourse</span></th>
-          <th scope="col"><span jhiTranslate="coopcycleApp.order.iDproduct">I Dproduct</span></th>
           <th scope="col"><span jhiTranslate="coopcycleApp.order.totalPrice">Total Price</span></th>
           <th scope="col"><span jhiTranslate="coopcycleApp.order.date">Date</span></th>
           <th scope="col"><span jhiTranslate="coopcycleApp.order.state">State</span></th>
-          <th scope="col"><span jhiTranslate="coopcycleApp.order.quantityAsked">Quantity Asked</span></th>
-          <th scope="col"><span jhiTranslate="coopcycleApp.order.productAvailable">Product Available</span></th>
-          <th scope="col"><span jhiTranslate="coopcycleApp.order.product">Product</span></th>
           <th scope="col"><span jhiTranslate="coopcycleApp.order.course">Course</span></th>
           <th scope="col"><span jhiTranslate="coopcycleApp.order.customer">Customer</span></th>
           <th scope="col"><span jhiTranslate="coopcycleApp.order.cooperative">Cooperative</span></th>
@@ -59,18 +55,9 @@
           <td>{{ order.iDcooperative }}</td>
           <td>{{ order.iDcustomer }}</td>
           <td>{{ order.iDcourse }}</td>
-          <td>{{ order.iDproduct }}</td>
           <td>{{ order.totalPrice }}</td>
           <td>{{ order.date | formatMediumDatetime }}</td>
           <td jhiTranslate="{{ 'coopcycleApp.State.' + order.state }}">{{ order.state }}</td>
-          <td>{{ order.quantityAsked }}</td>
-          <td>{{ order.productAvailable }}</td>
-          <td>
-            <span *ngFor="let product of order.products; let last = last">
-              <a class="form-control-static" [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a
-              >{{ last ? '' : ', ' }}
-            </span>
-          </td>
           <td>
             <div *ngIf="order.course">
               <a [routerLink]="['/course', order.course?.id, 'view']">{{ order.course?.id }}</a>

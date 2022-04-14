@@ -1,5 +1,5 @@
 import { IMenu } from 'app/entities/menu/menu.model';
-import { IOrder } from 'app/entities/order/order.model';
+import { IOrderContent } from 'app/entities/order-content/order-content.model';
 
 export interface IProduct {
   id?: number;
@@ -9,7 +9,7 @@ export interface IProduct {
   price?: number | null;
   disponibility?: number | null;
   menu?: IMenu | null;
-  ordercontents?: IOrder[] | null;
+  ordercontents?: IOrderContent[] | null;
 }
 
 export class Product implements IProduct {
@@ -21,7 +21,7 @@ export class Product implements IProduct {
     public price?: number | null,
     public disponibility?: number | null,
     public menu?: IMenu | null,
-    public ordercontents?: IOrder[] | null
+    public ordercontents?: IOrderContent[] | null
   ) {}
 }
 

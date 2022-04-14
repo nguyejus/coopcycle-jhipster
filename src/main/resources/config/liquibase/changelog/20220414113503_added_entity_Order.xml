@@ -26,9 +26,6 @@
             <column name="i_dcourse" type="integer">
                 <constraints nullable="false" />
             </column>
-            <column name="i_dproduct" type="integer">
-                <constraints nullable="false" />
-            </column>
             <column name="total_price" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -36,12 +33,6 @@
                 <constraints nullable="true" />
             </column>
             <column name="state" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="quantity_asked" type="integer">
-                <constraints nullable="true" />
-            </column>
-            <column name="product_available" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="course_id" type="bigint">
@@ -56,20 +47,6 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="jhi_order" columnName="date" columnDataType="${datetimeType}"/>
-    </changeSet>
-
-    <changeSet id="20220414113503-1-relations" author="jhipster">
-
-        <createTable tableName="rel_jhi_order__product">
-            <column name="product_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="jhi_order_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="jhi_order_id, product_id" tableName="rel_jhi_order__product"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -93,12 +70,9 @@
             <column name="i_dcooperative" type="numeric"/>
             <column name="i_dcustomer" type="numeric"/>
             <column name="i_dcourse" type="numeric"/>
-            <column name="i_dproduct" type="numeric"/>
             <column name="total_price" type="numeric"/>
             <column name="date" type="date"/>
             <column name="state" type="string"/>
-            <column name="quantity_asked" type="numeric"/>
-            <column name="product_available" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

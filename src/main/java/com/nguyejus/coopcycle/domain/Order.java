@@ -43,10 +43,6 @@ public class Order implements Serializable {
     @Column(name = "i_dcourse", nullable = false)
     private Integer iDcourse;
 
-    @NotNull
-    @Column(name = "i_dproduct", nullable = false)
-    private Integer iDproduct;
-
     @Min(value = 3)
     @Max(value = 300)
     @Column(name = "total_price")
@@ -59,22 +55,10 @@ public class Order implements Serializable {
     @Column(name = "state")
     private State state;
 
-    @Column(name = "quantity_asked")
-    private Integer quantityAsked;
-
-    @Column(name = "product_available")
-    private Boolean productAvailable;
-
-    @ManyToMany
-    @NotNull
-    @JoinTable(
-        name = "rel_jhi_order__product",
-        joinColumns = @JoinColumn(name = "jhi_order_id"),
-        inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
+    @OneToMany(mappedBy = "order")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "menu", "ordercontents" }, allowSetters = true)
-    private Set<Product> products = new HashSet<>();
+    @JsonIgnoreProperties(value = { "products", "order" }, allowSetters = true)
+    private Set<OrderContent> orderContents = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "orders", "deliveryMan" }, allowSetters = true)
@@ -155,19 +139,6 @@ public class Order implements Serializable {
         this.iDcourse = iDcourse;
     }
 
-    public Integer getiDproduct() {
-        return this.iDproduct;
-    }
-
-    public Order iDproduct(Integer iDproduct) {
-        this.setiDproduct(iDproduct);
-        return this;
-    }
-
-    public void setiDproduct(Integer iDproduct) {
-        this.iDproduct = iDproduct;
-    }
-
     public Integer getTotalPrice() {
         return this.totalPrice;
     }
@@ -207,54 +178,34 @@ public class Order implements Serializable {
         this.state = state;
     }
 
-    public Integer getQuantityAsked() {
-        return this.quantityAsked;
+    public Set<OrderContent> getOrderContents() {
+        return this.orderContents;
     }
 
-    public Order quantityAsked(Integer quantityAsked) {
-        this.setQuantityAsked(quantityAsked);
+    public void setOrderContents(Set<OrderContent> orderContents) {
+        if (this.orderContents != null) {
+            this.orderContents.forEach(i -> i.setOrder(null));
+        }
+        if (orderContents != null) {
+            orderContents.forEach(i -> i.setOrder(this));
+        }
+        this.orderContents = orderContents;
+    }
+
+    public Order orderContents(Set<OrderContent> orderContents) {
+        this.setOrderContents(orderContents);
         return this;
     }
 
-    public void setQuantityAsked(Integer quantityAsked) {
-        this.quantityAsked = quantityAsked;
-    }
-
-    public Boolean getProductAvailable() {
-        return this.productAvailable;
-    }
-
-    public Order productAvailable(Boolean productAvailable) {
-        this.setProductAvailable(productAvailable);
+    public Order addOrderContent(OrderContent orderContent) {
+        this.orderContents.add(orderContent);
+        orderContent.setOrder(this);
         return this;
     }
 
-    public void setProductAvailable(Boolean productAvailable) {
-        this.productAvailable = productAvailable;
-    }
-
-    public Set<Product> getProducts() {
-        return this.products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
-
-    public Order products(Set<Product> products) {
-        this.setProducts(products);
-        return this;
-    }
-
-    public Order addProduct(Product product) {
-        this.products.add(product);
-        product.getOrdercontents().add(this);
-        return this;
-    }
-
-    public Order removeProduct(Product product) {
-        this.products.remove(product);
-        product.getOrdercontents().remove(this);
+    public Order removeOrderContent(OrderContent orderContent) {
+        this.orderContents.remove(orderContent);
+        orderContent.setOrder(null);
         return this;
     }
 
@@ -325,12 +276,9 @@ public class Order implements Serializable {
             ", iDcooperative=" + getiDcooperative() +
             ", iDcustomer=" + getiDcustomer() +
             ", iDcourse=" + getiDcourse() +
-            ", iDproduct=" + getiDproduct() +
             ", totalPrice=" + getTotalPrice() +
             ", date='" + getDate() + "'" +
             ", state='" + getState() + "'" +
-            ", quantityAsked=" + getQuantityAsked() +
-            ", productAvailable='" + getProductAvailable() + "'" +
             "}";
     }
 }

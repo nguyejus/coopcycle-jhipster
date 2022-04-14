@@ -8,8 +8,6 @@ import { of, Subject, from } from 'rxjs';
 
 import { OrderService } from '../service/order.service';
 import { IOrder, Order } from '../order.model';
-import { IProduct } from 'app/entities/product/product.model';
-import { ProductService } from 'app/entities/product/service/product.service';
 import { ICourse } from 'app/entities/course/course.model';
 import { CourseService } from 'app/entities/course/service/course.service';
 import { ICustomer } from 'app/entities/customer/customer.model';
@@ -24,7 +22,6 @@ describe('Order Management Update Component', () => {
   let fixture: ComponentFixture<OrderUpdateComponent>;
   let activatedRoute: ActivatedRoute;
   let orderService: OrderService;
-  let productService: ProductService;
   let courseService: CourseService;
   let customerService: CustomerService;
   let cooperativeService: CooperativeService;
@@ -49,7 +46,6 @@ describe('Order Management Update Component', () => {
     fixture = TestBed.createComponent(OrderUpdateComponent);
     activatedRoute = TestBed.inject(ActivatedRoute);
     orderService = TestBed.inject(OrderService);
-    productService = TestBed.inject(ProductService);
     courseService = TestBed.inject(CourseService);
     customerService = TestBed.inject(CustomerService);
     cooperativeService = TestBed.inject(CooperativeService);
@@ -58,25 +54,6 @@ describe('Order Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should call Product query and add missing value', () => {
-      const order: IOrder = { id: 456 };
-      const products: IProduct[] = [{ id: 51993 }];
-      order.products = products;
-
-      const productCollection: IProduct[] = [{ id: 4055 }];
-      jest.spyOn(productService, 'query').mockReturnValue(of(new HttpResponse({ body: productCollection })));
-      const additionalProducts = [...products];
-      const expectedCollection: IProduct[] = [...additionalProducts, ...productCollection];
-      jest.spyOn(productService, 'addProductToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-      activatedRoute.data = of({ order });
-      comp.ngOnInit();
-
-      expect(productService.query).toHaveBeenCalled();
-      expect(productService.addProductToCollectionIfMissing).toHaveBeenCalledWith(productCollection, ...additionalProducts);
-      expect(comp.productsSharedCollection).toEqual(expectedCollection);
-    });
-
     it('Should call Course query and add missing value', () => {
       const order: IOrder = { id: 456 };
       const course: ICourse = { id: 27628 };
@@ -136,8 +113,6 @@ describe('Order Management Update Component', () => {
 
     it('Should update editForm', () => {
       const order: IOrder = { id: 456 };
-      const products: IProduct = { id: 29956 };
-      order.products = [products];
       const course: ICourse = { id: 23817 };
       order.course = course;
       const customer: ICustomer = { id: 67558 };
@@ -149,7 +124,6 @@ describe('Order Management Update Component', () => {
       comp.ngOnInit();
 
       expect(comp.editForm.value).toEqual(expect.objectContaining(order));
-      expect(comp.productsSharedCollection).toContain(products);
       expect(comp.coursesSharedCollection).toContain(course);
       expect(comp.customersSharedCollection).toContain(customer);
       expect(comp.cooperativesSharedCollection).toContain(cooperative);
@@ -221,14 +195,6 @@ describe('Order Management Update Component', () => {
   });
 
   describe('Tracking relationships identifiers', () => {
-    describe('trackProductById', () => {
-      it('Should return tracked Product primary key', () => {
-        const entity = { id: 123 };
-        const trackResult = comp.trackProductById(0, entity);
-        expect(trackResult).toEqual(entity.id);
-      });
-    });
-
     describe('trackCourseById', () => {
       it('Should return tracked Course primary key', () => {
         const entity = { id: 123 };
@@ -250,34 +216,6 @@ describe('Order Management Update Component', () => {
         const entity = { id: 123 };
         const trackResult = comp.trackCooperativeById(0, entity);
         expect(trackResult).toEqual(entity.id);
-      });
-    });
-  });
-
-  describe('Getting selected relationships', () => {
-    describe('getSelectedProduct', () => {
-      it('Should return option if no Product is selected', () => {
-        const option = { id: 123 };
-        const result = comp.getSelectedProduct(option);
-        expect(result === option).toEqual(true);
-      });
-
-      it('Should return selected Product for according option', () => {
-        const option = { id: 123 };
-        const selected = { id: 123 };
-        const selected2 = { id: 456 };
-        const result = comp.getSelectedProduct(option, [selected2, selected]);
-        expect(result === selected).toEqual(true);
-        expect(result === selected2).toEqual(false);
-        expect(result === option).toEqual(false);
-      });
-
-      it('Should return option if this Product is not selected', () => {
-        const option = { id: 123 };
-        const selected = { id: 456 };
-        const result = comp.getSelectedProduct(option, [selected]);
-        expect(result === option).toEqual(true);
-        expect(result === selected).toEqual(false);
       });
     });
   });

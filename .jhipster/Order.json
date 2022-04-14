@@ -26,11 +26,6 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "iDproduct",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "totalPrice",
       "fieldType": "Integer",
       "fieldValidateRules": ["min", "max"],
@@ -45,14 +40,6 @@
       "fieldName": "state",
       "fieldType": "State",
       "fieldValues": "Preparing,PickedUp,OnTheWay,Delivered"
-    },
-    {
-      "fieldName": "quantityAsked",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "productAvailable",
-      "fieldType": "Boolean"
     }
   ],
   "fluentMethods": true,
@@ -62,12 +49,10 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityName": "product",
-      "otherEntityRelationshipName": "ordercontent",
-      "ownerSide": true,
-      "relationshipName": "product",
-      "relationshipType": "many-to-many",
-      "relationshipValidateRules": "required"
+      "otherEntityName": "orderContent",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "orderContent",
+      "relationshipType": "one-to-many"
     },
     {
       "otherEntityName": "course",

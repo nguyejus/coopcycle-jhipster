@@ -49,8 +49,8 @@ public class Product implements Serializable {
 
     @ManyToMany(mappedBy = "products")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "products", "course", "customer", "cooperative" }, allowSetters = true)
-    private Set<Order> ordercontents = new HashSet<>();
+    @JsonIgnoreProperties(value = { "products", "order" }, allowSetters = true)
+    private Set<OrderContent> ordercontents = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -145,34 +145,34 @@ public class Product implements Serializable {
         return this;
     }
 
-    public Set<Order> getOrdercontents() {
+    public Set<OrderContent> getOrdercontents() {
         return this.ordercontents;
     }
 
-    public void setOrdercontents(Set<Order> orders) {
+    public void setOrdercontents(Set<OrderContent> orderContents) {
         if (this.ordercontents != null) {
             this.ordercontents.forEach(i -> i.removeProduct(this));
         }
-        if (orders != null) {
-            orders.forEach(i -> i.addProduct(this));
+        if (orderContents != null) {
+            orderContents.forEach(i -> i.addProduct(this));
         }
-        this.ordercontents = orders;
+        this.ordercontents = orderContents;
     }
 
-    public Product ordercontents(Set<Order> orders) {
-        this.setOrdercontents(orders);
+    public Product ordercontents(Set<OrderContent> orderContents) {
+        this.setOrdercontents(orderContents);
         return this;
     }
 
-    public Product addOrdercontent(Order order) {
-        this.ordercontents.add(order);
-        order.getProducts().add(this);
+    public Product addOrdercontent(OrderContent orderContent) {
+        this.ordercontents.add(orderContent);
+        orderContent.getProducts().add(this);
         return this;
     }
 
-    public Product removeOrdercontent(Order order) {
-        this.ordercontents.remove(order);
-        order.getProducts().remove(this);
+    public Product removeOrdercontent(OrderContent orderContent) {
+        this.ordercontents.remove(orderContent);
+        orderContent.getProducts().remove(this);
         return this;
     }
 

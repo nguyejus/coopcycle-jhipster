@@ -116,27 +116,6 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="coopcycleApp.order.iDproduct" for="field_iDproduct">I Dproduct</label>
-          <input type="number" class="form-control" name="iDproduct" id="field_iDproduct" data-cy="iDproduct" formControlName="iDproduct" />
-          <div *ngIf="editForm.get('iDproduct')!.invalid && (editForm.get('iDproduct')!.dirty || editForm.get('iDproduct')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('iDproduct')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('iDproduct')?.errors?.number"
-              jhiTranslate="entity.validation.number"
-            >
-              This field should be a number.
-            </small>
-          </div>
-        </div>
-
-        <div class="row mb-3">
           <label class="form-label" jhiTranslate="coopcycleApp.order.totalPrice" for="field_totalPrice">Total Price</label>
           <input
             type="number"
@@ -194,53 +173,6 @@
             <option [ngValue]="null">{{ 'coopcycleApp.State.null' | translate }}</option>
             <option *ngFor="let state of stateValues" [value]="state">{{ 'coopcycleApp.State.' + state | translate }}</option>
           </select>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="coopcycleApp.order.quantityAsked" for="field_quantityAsked">Quantity Asked</label>
-          <input
-            type="number"
-            class="form-control"
-            name="quantityAsked"
-            id="field_quantityAsked"
-            data-cy="quantityAsked"
-            formControlName="quantityAsked"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="coopcycleApp.order.productAvailable" for="field_productAvailable"
-            >Product Available</label
-          >
-          <input
-            type="checkbox"
-            class="form-check"
-            name="productAvailable"
-            id="field_productAvailable"
-            data-cy="productAvailable"
-            formControlName="productAvailable"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label jhiTranslate="coopcycleApp.order.product" for="field_products">Product</label>
-          <select class="form-control" id="field_products" data-cy="product" multiple name="products" formControlName="products">
-            <option
-              [ngValue]="getSelectedProduct(productOption, editForm.get('products')!.value)"
-              *ngFor="let productOption of productsSharedCollection; trackBy: trackProductById"
-            >
-              {{ productOption.id }}
-            </option>
-          </select>
-        </div>
-        <div *ngIf="editForm.get(['products'])!.invalid && (editForm.get(['products'])!.dirty || editForm.get(['products'])!.touched)">
-          <small
-            class="form-text text-danger"
-            *ngIf="editForm.get(['products'])?.errors?.required"
-            jhiTranslate="entity.validation.required"
-          >
-            This field is required.
-          </small>
         </div>
 
         <div class="row mb-3">

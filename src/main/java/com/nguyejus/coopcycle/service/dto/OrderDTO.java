@@ -3,9 +3,7 @@ package com.nguyejus.coopcycle.service.dto;
 import com.nguyejus.coopcycle.domain.enumeration.State;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.validation.constraints.*;
 
 /**
@@ -27,9 +25,6 @@ public class OrderDTO implements Serializable {
     @NotNull
     private Integer iDcourse;
 
-    @NotNull
-    private Integer iDproduct;
-
     @Min(value = 3)
     @Max(value = 300)
     private Integer totalPrice;
@@ -37,12 +32,6 @@ public class OrderDTO implements Serializable {
     private ZonedDateTime date;
 
     private State state;
-
-    private Integer quantityAsked;
-
-    private Boolean productAvailable;
-
-    private Set<ProductDTO> products = new HashSet<>();
 
     private CourseDTO course;
 
@@ -90,14 +79,6 @@ public class OrderDTO implements Serializable {
         this.iDcourse = iDcourse;
     }
 
-    public Integer getiDproduct() {
-        return iDproduct;
-    }
-
-    public void setiDproduct(Integer iDproduct) {
-        this.iDproduct = iDproduct;
-    }
-
     public Integer getTotalPrice() {
         return totalPrice;
     }
@@ -120,30 +101,6 @@ public class OrderDTO implements Serializable {
 
     public void setState(State state) {
         this.state = state;
-    }
-
-    public Integer getQuantityAsked() {
-        return quantityAsked;
-    }
-
-    public void setQuantityAsked(Integer quantityAsked) {
-        this.quantityAsked = quantityAsked;
-    }
-
-    public Boolean getProductAvailable() {
-        return productAvailable;
-    }
-
-    public void setProductAvailable(Boolean productAvailable) {
-        this.productAvailable = productAvailable;
-    }
-
-    public Set<ProductDTO> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<ProductDTO> products) {
-        this.products = products;
     }
 
     public CourseDTO getCourse() {
@@ -200,13 +157,9 @@ public class OrderDTO implements Serializable {
             ", iDcooperative=" + getiDcooperative() +
             ", iDcustomer=" + getiDcustomer() +
             ", iDcourse=" + getiDcourse() +
-            ", iDproduct=" + getiDproduct() +
             ", totalPrice=" + getTotalPrice() +
             ", date='" + getDate() + "'" +
             ", state='" + getState() + "'" +
-            ", quantityAsked=" + getQuantityAsked() +
-            ", productAvailable='" + getProductAvailable() + "'" +
-            ", products=" + getProducts() +
             ", course=" + getCourse() +
             ", customer=" + getCustomer() +
             ", cooperative=" + getCooperative() +

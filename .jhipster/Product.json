@@ -43,7 +43,7 @@
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "order",
+      "otherEntityName": "orderContent",
       "otherEntityRelationshipName": "product",
       "ownerSide": false,
       "relationshipName": "ordercontent",

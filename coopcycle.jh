@@ -40,12 +40,9 @@ entity Order{
     IDcooperative Integer required
     IDcustomer Integer required
     IDcourse Integer required
-    IDproduct Integer required
     totalPrice Integer min(3) max(300)
     date ZonedDateTime
     state State
-    QuantityAsked Integer
-    ProductAvailable Boolean
 }
 
 entity Product{
@@ -56,6 +53,12 @@ entity Product{
     disponibility Integer min(0)
 }
 
+entity OrderContent{
+	IDproduct Integer required
+    IDorder Integer required
+    QuantityAsked Integer
+    ProductAvailable Boolean
+}
 
 enum State {
     Preparing, PickedUp, OnTheWay, Delivered
@@ -68,11 +71,11 @@ relationship OneToMany {
 	Customer to Order
     DeliveryMan to Course
     Cooperative{order} to Order{cooperative}
+    Order to OrderContent
 }
 
 relationship ManyToMany{
-	Order{product required} to Product{ordercontent}
+	OrderContent{product required} to Product{ordercontent}
 }
-
 
 dto * with mapstruct

@@ -30,12 +30,9 @@ describe('Order Service', () => {
       iDcooperative: 0,
       iDcustomer: 0,
       iDcourse: 0,
-      iDproduct: 0,
       totalPrice: 0,
       date: currentDate,
       state: State.Preparing,
-      quantityAsked: 0,
-      productAvailable: false,
     };
   });
 
@@ -86,12 +83,9 @@ describe('Order Service', () => {
           iDcooperative: 1,
           iDcustomer: 1,
           iDcourse: 1,
-          iDproduct: 1,
           totalPrice: 1,
           date: currentDate.format(DATE_TIME_FORMAT),
           state: 'BBBBBB',
-          quantityAsked: 1,
-          productAvailable: true,
         },
         elemDefault
       );
@@ -115,9 +109,7 @@ describe('Order Service', () => {
         {
           iDorder: 1,
           iDcustomer: 1,
-          iDproduct: 1,
-          quantityAsked: 1,
-          productAvailable: true,
+          totalPrice: 1,
         },
         new Order()
       );
@@ -146,12 +138,9 @@ describe('Order Service', () => {
           iDcooperative: 1,
           iDcustomer: 1,
           iDcourse: 1,
-          iDproduct: 1,
           totalPrice: 1,
           date: currentDate.format(DATE_TIME_FORMAT),
           state: 'BBBBBB',
-          quantityAsked: 1,
-          productAvailable: true,
         },
         elemDefault
       );
@@ -208,7 +197,7 @@ describe('Order Service', () => {
       });
 
       it('should add only unique Order to an array', () => {
-        const orderArray: IOrder[] = [{ id: 123 }, { id: 456 }, { id: 17324 }];
+        const orderArray: IOrder[] = [{ id: 123 }, { id: 456 }, { id: 31710 }];
         const orderCollection: IOrder[] = [{ id: 123 }];
         expectedResult = service.addOrderToCollectionIfMissing(orderCollection, ...orderArray);
         expect(expectedResult).toHaveLength(3);
