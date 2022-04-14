@@ -1,0 +1,111 @@
+<div>
+  <h2 id="page-heading" data-cy="OrderHeading">
+    <span jhiTranslate="coopcycleApp.order.home.title">Orders</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="coopcycleApp.order.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-order"
+        [routerLink]="['/order/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="coopcycleApp.order.home.createLabel"> Create a new Order </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="orders?.length === 0">
+    <span jhiTranslate="coopcycleApp.order.home.notFound">No orders found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="orders && orders.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.iDorder">I Dorder</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.iDcooperative">I Dcooperative</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.iDcustomer">I Dcustomer</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.iDcourse">I Dcourse</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.iDproduct">I Dproduct</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.totalPrice">Total Price</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.date">Date</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.state">State</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.quantityAsked">Quantity Asked</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.productAvailable">Product Available</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.product">Product</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.course">Course</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.customer">Customer</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.order.cooperative">Cooperative</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/order', order.id, 'view']">{{ order.id }}</a>
+          </td>
+          <td>{{ order.iDorder }}</td>
+          <td>{{ order.iDcooperative }}</td>
+          <td>{{ order.iDcustomer }}</td>
+          <td>{{ order.iDcourse }}</td>
+          <td>{{ order.iDproduct }}</td>
+          <td>{{ order.totalPrice }}</td>
+          <td>{{ order.date | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'coopcycleApp.State.' + order.state }}">{{ order.state }}</td>
+          <td>{{ order.quantityAsked }}</td>
+          <td>{{ order.productAvailable }}</td>
+          <td>
+            <span *ngFor="let product of order.products; let last = last">
+              <a class="form-control-static" [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <div *ngIf="order.course">
+              <a [routerLink]="['/course', order.course?.id, 'view']">{{ order.course?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="order.customer">
+              <a [routerLink]="['/customer', order.customer?.id, 'view']">{{ order.customer?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="order.cooperative">
+              <a [routerLink]="['/cooperative', order.cooperative?.id, 'view']">{{ order.cooperative?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/order', order.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/order', order.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(order)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-course-heading" data-cy="CourseCreateUpdateHeading" jhiTranslate="coopcycleApp.course.home.createOrEditLabel">
+        Create or edit a Course
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="coopcycleApp.course.iDcourse" for="field_iDcourse">I Dcourse</label>
+          <input type="number" class="form-control" name="iDcourse" id="field_iDcourse" data-cy="iDcourse" formControlName="iDcourse" />
+          <div *ngIf="editForm.get('iDcourse')!.invalid && (editForm.get('iDcourse')!.dirty || editForm.get('iDcourse')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('iDcourse')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('iDcourse')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="coopcycleApp.course.iddelveryman" for="field_iddelveryman">Iddelveryman</label>
+          <input
+            type="number"
+            class="form-control"
+            name="iddelveryman"
+            id="field_iddelveryman"
+            data-cy="iddelveryman"
+            formControlName="iddelveryman"
+          />
+          <div
+            *ngIf="editForm.get('iddelveryman')!.invalid && (editForm.get('iddelveryman')!.dirty || editForm.get('iddelveryman')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('iddelveryman')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('iddelveryman')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="coopcycleApp.course.deliveryMan" for="field_deliveryMan">Delivery Man</label>
+          <select class="form-control" id="field_deliveryMan" data-cy="deliveryMan" name="deliveryMan" formControlName="deliveryMan">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                deliveryManOption.id === editForm.get('deliveryMan')!.value?.id ? editForm.get('deliveryMan')!.value : deliveryManOption
+              "
+              *ngFor="let deliveryManOption of deliveryMenSharedCollection; trackBy: trackDeliveryManById"
+            >
+              {{ deliveryManOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

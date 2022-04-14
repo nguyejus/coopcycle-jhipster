@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20220414113501",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "course",
+  "fields": [
+    {
+      "fieldName": "iDcourse",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "iddelveryman",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Course",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "order",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "deliveryMan",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "deliveryMan",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

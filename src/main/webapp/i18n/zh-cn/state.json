@@ -1,0 +1,11 @@
+{
+  "coopcycleApp": {
+    "State": {
+      "null": "",
+      "Preparing": "Preparing",
+      "PickedUp": "PickedUp",
+      "OnTheWay": "OnTheWay",
+      "Delivered": "Delivered"
+    }
+  }
+}

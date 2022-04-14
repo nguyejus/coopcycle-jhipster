@@ -1,0 +1,28 @@
+{
+  "coopcycleApp": {
+    "menu": {
+      "home": {
+        "title": "Menus",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Menu",
+        "createOrEditLabel": "Создать или отредактировать Menu",
+        "notFound": "Menus не найдено"
+      },
+      "created": "Новый Menu создан с идентификатором {{ param }}",
+      "updated": "Menu обновлен с идентификатором {{ param }}",
+      "deleted": "Menu удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Menu {{ id }}?"
+      },
+      "detail": {
+        "title": "Menu"
+      },
+      "id": "ID",
+      "iDmenu": "I Dmenu",
+      "iDcooperative": "I Dcooperative",
+      "lastupdate": "Lastupdate",
+      "product": "Product",
+      "cooperative": "Cooperative"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="course">
+      <h2 data-cy="courseDetailsHeading"><span jhiTranslate="coopcycleApp.course.detail.title">Course</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ course.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.course.iDcourse">I Dcourse</span></dt>
+        <dd>
+          <span>{{ course.iDcourse }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.course.iddelveryman">Iddelveryman</span></dt>
+        <dd>
+          <span>{{ course.iddelveryman }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.course.deliveryMan">Delivery Man</span></dt>
+        <dd>
+          <div *ngIf="course.deliveryMan">
+            <a [routerLink]="['/delivery-man', course.deliveryMan?.id, 'view']">{{ course.deliveryMan?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/course', course.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+{
+  "applications": "*",
+  "changelogDate": "20220414113503",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "jhi_order",
+  "fields": [
+    {
+      "fieldName": "iDorder",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "iDcooperative",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "iDcustomer",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "iDcourse",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "iDproduct",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "totalPrice",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "300",
+      "fieldValidateRulesMin": "3"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "State",
+      "fieldValues": "Preparing,PickedUp,OnTheWay,Delivered"
+    },
+    {
+      "fieldName": "quantityAsked",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "productAvailable",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Order",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "ordercontent",
+      "ownerSide": true,
+      "relationshipName": "product",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "course",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "customer",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "cooperative",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "cooperative",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

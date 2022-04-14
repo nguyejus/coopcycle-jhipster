@@ -1,0 +1,28 @@
+{
+  "coopcycleApp": {
+    "menu": {
+      "home": {
+        "title": "Menus",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Menu を追加",
+        "createOrEditLabel": "Menuを追加または編集",
+        "notFound": "No Menus found"
+      },
+      "created": "A new Menu is created with identifier {{ param }}",
+      "updated": "A Menu is updated with identifier {{ param }}",
+      "deleted": "A Menu is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Menu {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Menu"
+      },
+      "id": "ID",
+      "iDmenu": "I Dmenu",
+      "iDcooperative": "I Dcooperative",
+      "lastupdate": "Lastupdate",
+      "product": "Product",
+      "cooperative": "Cooperative"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "coopcycleApp": {
+    "course": {
+      "home": {
+        "title": "Courses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Course を追加",
+        "createOrEditLabel": "Courseを追加または編集",
+        "notFound": "No Courses found"
+      },
+      "created": "A new Course is created with identifier {{ param }}",
+      "updated": "A Course is updated with identifier {{ param }}",
+      "deleted": "A Course is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Course {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Course"
+      },
+      "id": "ID",
+      "iDcourse": "I Dcourse",
+      "iddelveryman": "Iddelveryman",
+      "order": "Order",
+      "deliveryMan": "Delivery Man"
+    }
+  }
+}

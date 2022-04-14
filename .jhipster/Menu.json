@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20220414113502",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "menu",
+  "fields": [
+    {
+      "fieldName": "iDmenu",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "iDcooperative",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastupdate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Menu",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "menu",
+      "relationshipName": "product",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "cooperative",
+      "otherEntityRelationshipName": "menu",
+      "relationshipName": "cooperative",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

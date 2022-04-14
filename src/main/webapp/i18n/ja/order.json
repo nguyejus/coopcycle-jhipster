@@ -1,0 +1,37 @@
+{
+  "coopcycleApp": {
+    "order": {
+      "home": {
+        "title": "Orders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Order を追加",
+        "createOrEditLabel": "Orderを追加または編集",
+        "notFound": "No Orders found"
+      },
+      "created": "A new Order is created with identifier {{ param }}",
+      "updated": "A Order is updated with identifier {{ param }}",
+      "deleted": "A Order is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Order {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Order"
+      },
+      "id": "ID",
+      "iDorder": "I Dorder",
+      "iDcooperative": "I Dcooperative",
+      "iDcustomer": "I Dcustomer",
+      "iDcourse": "I Dcourse",
+      "iDproduct": "I Dproduct",
+      "totalPrice": "Total Price",
+      "date": "Date",
+      "state": "State",
+      "quantityAsked": "Quantity Asked",
+      "productAvailable": "Product Available",
+      "product": "Product",
+      "course": "Course",
+      "customer": "Customer",
+      "cooperative": "Cooperative"
+    }
+  }
+}

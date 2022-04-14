@@ -1,0 +1,31 @@
+{
+  "coopcycleApp": {
+    "deliveryMan": {
+      "home": {
+        "title": "DeliveryMen",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Delivery Man を追加",
+        "createOrEditLabel": "Delivery Manを追加または編集",
+        "notFound": "No Delivery Men found"
+      },
+      "created": "A new Delivery Man is created with identifier {{ param }}",
+      "updated": "A Delivery Man is updated with identifier {{ param }}",
+      "deleted": "A Delivery Man is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Delivery Man {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Delivery Man"
+      },
+      "id": "ID",
+      "iD": "I D",
+      "name": "Name",
+      "surname": "Surname",
+      "telephone": "Telephone",
+      "vehicule": "Vehicule",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "course": "Course"
+    }
+  }
+}
